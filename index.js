@@ -1,7 +1,7 @@
 const fs = require('fs'); // built file strctutre
 const http = require('http'); // built http server
 const url = require('url'); // for rounting
-
+const replaceTemplate = require('./modules/replaceTemplate');
 
 ///////////////////////////////////////////////////
 /// FILES
@@ -36,20 +36,7 @@ const url = require('url'); // for rounting
 
 ///////////////////////////////////////////////////////////////////////
 // SERVER
-const replaceTemplate = (temp, product) => {
-    let output = temp.replace(/{%PRODUCTNAME%}/g, product.productName);
-    output = output.replace(/{%IMAGE%}/g, product.image);
-    output = output.replace(/{%PRICE%}/g, product.price);
-    output = output.replace(/{%FROM%}/g, product.from);
-    output = output.replace(/{%NUTRIENTS%}/g, product.nutrients);
-    output = output.replace(/{%DESCRIPTION%}/g, product.description);
-    output = output.replace(/{%ID%}/g, product.id);
-    output = output.replace(/{%QUANTITY%}/g, product.quantity);
 
-
-    if(!product.organic) output = output.replace(/{%NOT_ORGANIC%}/g, 'not-organic');
-    return output;
-}
 
 const tempOverview = fs.readFileSync(`${__dirname}/templates/template-overview.html`, 'utf-8')
 const tempCard = fs.readFileSync(`${__dirname}/templates/template-card.html`, 'utf-8')
